@@ -24,21 +24,48 @@ public class DialogHelper
 
     public static DialogResult<SaveFileDialog> ShowSaveFileDialog()
     {
-        return ShowSaveFileDialog(new SaveFileDialog());
+        return ShowSaveFileDialog(dialog: new SaveFileDialog
+        {
+            Site = null,
+            Tag = null,
+            AddExtension = false,
+            AddToRecent = false,
+            CheckFileExists = false,
+            CheckPathExists = false,
+            ClientGuid = null,
+            DefaultExt = null,
+            DereferenceLinks = false,
+            FileName = null,
+            Filter = null,
+            FilterIndex = 0,
+            InitialDirectory = null,
+            RestoreDirectory = false,
+            ShowHelp = false,
+            ShowHiddenFiles = false,
+            SupportMultiDottedExtensions = false,
+            Title = null,
+            ValidateNames = false,
+            AutoUpgradeEnabled = false,
+            OkRequiresInteraction = false,
+            ShowPinnedPlaces = false,
+            CheckWriteAccess = false,
+            CreatePrompt = false,
+            ExpandedMode = false,
+            OverwritePrompt = false
+        });
     }
 
     public static DialogResult<SaveFileDialog> ShowSaveFileDialog(SaveFileDialog dialog)
     {
-        return new DialogResult<SaveFileDialog>
-        {
-            Result = dialog.ShowDialog(),
-            Dialog = dialog
-        };
+        var result = new DialogResult<SaveFileDialog>();
+        result.Result = dialog.ShowDialog();
+        result.Dialog = dialog;
+        return result;
     }
 
     public static DialogResult<OpenFileDialog> ShowOpenFileDialog()
     {
-        return ShowOpenFileDialog(new OpenFileDialog());
+        return ShowOpenFileDialog(dialog: new OpenFileDialog());
     }
 
     public static DialogResult<OpenFileDialog> ShowOpenFileDialog(OpenFileDialog dialog)
@@ -52,6 +79,6 @@ public class DialogHelper
 
     public static string ExtensionFilter(Dictionary<string, string> extensions)
     {
-        return string.Join("|", extensions.Select(kv => $"{kv.Key}|*{kv.Value}").ToArray());
+        return string.Join(separator: "|", value: extensions.Select(selector: kv => $"{kv.Key}|*{kv.Value}").ToArray());
     }
 }

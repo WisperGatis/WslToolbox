@@ -1,4 +1,5 @@
-﻿namespace WslToolbox.UI.Core.Models;
+﻿#nullable enable
+namespace WslToolbox.UI.Core.Models;
 
 public class UpdateModel<T>
 {

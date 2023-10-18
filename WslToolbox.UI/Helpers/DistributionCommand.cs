@@ -2,7 +2,7 @@
 
 namespace WslToolbox.UI.Helpers;
 
-public static class DistributionCommand
+public static class Command
 {
     public static bool CanStartDistribution(Distribution? distribution)
     {

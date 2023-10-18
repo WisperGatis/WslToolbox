@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace WslToolbox.Core.Legacy.Commands.Distribution;
 
@@ -8,8 +9,12 @@ public static class ConvertDistributionCommand
 
     public static async Task<CommandClass> Execute(DistributionClass distribution)
     {
-        return await Task.Run(() => CommandClass.ExecuteCommand(string.Format(
-            Command, distribution.Name
-        ))).ConfigureAwait(true);
+        if (distribution == null) throw new ArgumentNullException(nameof(distribution));
+        return await Task.Run(() =>
+        {
+            return CommandClass.ExecuteCommand(string.Format(
+                Command, distribution.Name
+            ));
+        }).ConfigureAwait(true);
     }
 }

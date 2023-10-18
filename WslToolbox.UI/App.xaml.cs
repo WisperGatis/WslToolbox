@@ -108,7 +108,7 @@ public partial class App : Application
         _logger = GetService<ILogger<App>>();
         GetService<AppNotificationService>().Initialize();
 
-        UnhandledException += App_UnhandledException;
+        UnhandledException += (o, args) => App_UnhandledException(o, args);
     }
 
     private IHost Host { get; }

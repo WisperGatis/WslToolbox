@@ -2,6 +2,9 @@
   "profiles": {
     "WslToolbox.Core": {
       "commandName": "Project"
+    },
+    "Profil 1": {
+      "commandName": "Executable"
     }
   }
 }

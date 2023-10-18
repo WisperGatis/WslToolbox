@@ -49,8 +49,10 @@ public static class WslConfigHelper
                     object? keyVal = null;
                     if (subPropertyInfo.PropertyType == typeof(bool))
                     {
+                        // ReSharper disable once HeapView.BoxingAllocation
                         keyVal = false;
-                    } else if (subPropertyInfo.PropertyType == typeof(string))
+                    } 
+                    else if (subPropertyInfo.PropertyType == typeof(string))
                     {
                         keyVal = "wtf";
                     }
@@ -58,8 +60,8 @@ public static class WslConfigHelper
                     subPropertyInfo.SetValue(propertyInstance, keyVal);
                 }
                 
-                Console.WriteLine($"Setting {propertyInfo.GetType()} with {instance.GetType()}");
-                propertyInfo.SetValue(configInstance, instance);
+                Console.WriteLine($"Setting {propertyInfo.GetType()} with {sectionKeys.GetType()}");
+                propertyInfo.SetValue(configInstance, sectionKeys);
             }
         }
 

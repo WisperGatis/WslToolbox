@@ -12,17 +12,23 @@ public class LogService
     {
     }
 
-    public static async Task ReadLog(CancellationTokenSource cancellationToken)
+    public static Task ReadLog()
     {
-        var watcher = new FileSystemWatcher
-        {
-            Path = Toolbox.AppData,
-            Filter = "blaat.txt",
-            NotifyFilter = NotifyFilters.LastWrite,
-            EnableRaisingEvents = true,
-        };
+        return ReadLog(null);
+    }
 
+    public static Task ReadLog(CancellationTokenSource cancellationToken)
+    {
+        if (cancellationToken == null) throw new ArgumentNullException(nameof(cancellationToken));
+        var watcher = new FileSystemWatcher();
+        watcher.Path = Toolbox.AppData;
+        watcher.Filter = "blaat.txt";
+        watcher.NotifyFilter = NotifyFilters.LastWrite;
+        watcher.EnableRaisingEvents = true; 
+
+        // ReSharper disable once HeapView.ObjectAllocation.Possible
         watcher.Changed += async (_, _) => await OnLogFileChanged(cancellationToken);
+        return Task.CompletedTask;
     }
 
     private static async Task OnLogFileChanged(CancellationTokenSource cancellationToken)

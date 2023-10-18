@@ -4,10 +4,10 @@ namespace WslToolbox.UI.Helpers;
 
 public static class ResourceExtensions
 {
-    private static readonly ResourceLoader _resourceLoader = new();
+    private static readonly ResourceLoader ResourceLoader = new();
 
     public static string GetLocalized(this string resourceKey)
     {
-        return _resourceLoader.GetString(resourceKey);
+        return ResourceLoader.GetString(resourceKey);
     }
 }

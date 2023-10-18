@@ -6,6 +6,8 @@ public static class Json
 {
     public static async Task<T> ToObjectAsync<T>(string value)
     {
+        if (string.IsNullOrWhiteSpace(value))
+            throw new ArgumentException("Value cannot be null or whitespace.", nameof(value));
         return await Task.Run(() => JsonConvert.DeserializeObject<T>(value));
     }
 

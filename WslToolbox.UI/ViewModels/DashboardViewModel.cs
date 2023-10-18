@@ -50,17 +50,17 @@ public partial class DashboardViewModel : ObservableRecipient
 
     public ObservableCollection<Distribution> Distributions { get; set; } = new();
 
-    private static bool DistributionIsRunning(Distribution? distribution)
+    private static bool IsRunning(Distribution? distribution)
     {
         return distribution is {State: "Running"};
     }
 
-    private static bool DistributionIsStopped(Distribution? distribution)
+    private static bool IsStopped(Distribution? distribution)
     {
         return distribution is {State: "Stopped"};
     }
 
-    private static bool DistributionIsBusy(Distribution? distribution)
+    private static bool IsBusy(Distribution? distribution)
     {
         return distribution is {State: "Busy"};
     }
@@ -178,13 +178,13 @@ public partial class DashboardViewModel : ObservableRecipient
         }
     }
 
-    [RelayCommand(CanExecute = nameof(DistributionIsRunning))]
+    [RelayCommand(CanExecute = nameof(IsRunning))]
     private void OpenShellDistribution(Distribution? distribution)
     {
         _distributionService.OpenShellDistribution(distribution);
     }
 
-    [RelayCommand(CanExecute = nameof(DistributionIsStopped))]
+    [RelayCommand(CanExecute = nameof(IsStopped))]
     private async Task DeleteDistribution(Distribution? distribution)
     {
         var deleteConfirm = await _messenger.ShowDialog("Delete", $"Delete {distribution.Name}?", "Delete", "Cancel");
@@ -203,13 +203,13 @@ public partial class DashboardViewModel : ObservableRecipient
         await _distributionService.StartDistribution(distribution);
     }
 
-    [RelayCommand(CanExecute = nameof(DistributionIsRunning))]
+    [RelayCommand(CanExecute = nameof(IsRunning))]
     private async Task StopDistribution(Distribution? distribution)
     {
         await _distributionService.StopDistribution(distribution);
     }
 
-    [RelayCommand(CanExecute = nameof(DistributionIsStopped))]
+    [RelayCommand(CanExecute = nameof(IsStopped))]
     private async Task StartDistribution(Distribution? distribution)
     {
         await _distributionService.StartDistribution(distribution);

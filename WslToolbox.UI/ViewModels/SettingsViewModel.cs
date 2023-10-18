@@ -103,7 +103,7 @@ public partial class SettingsViewModel : ObservableRecipient
     [RelayCommand]
     private async Task CheckForUpdates()
     {
-        UpdaterResult = new UpdateResultModel { IsChecking = true };
+        UpdaterResult = new() { IsChecking = true };
 
         await Task.Delay(TimeSpan.FromSeconds(2));
         UpdaterResult = await _updateService.GetUpdateDetails();
@@ -116,7 +116,7 @@ public partial class SettingsViewModel : ObservableRecipient
         {
             _messenger.ShowUpdateInfoBar("A new update is available", "Update available", InfoBarSeverity.Success);
             _notificationService.Show(UpdateNotification.UpdatesAvailable(UpdaterResult));
-            var result = await _messenger.ShowUpdateDialog(new UpdateViewModel
+            var result = await _messenger.ShowUpdateDialog(new()
             {
                 EnableInstallUpdate = true,
                 CurrentVersion = UpdaterResult.CurrentVersion,
@@ -153,7 +153,7 @@ public partial class SettingsViewModel : ObservableRecipient
                 var downloadedFile = await _downloadService.DownloadFileAsync(UpdaterResult);
                 _messenger.ShowUpdateInfoBar("Starting updater...");
                 ShellHelper.OpenExecutable(downloadedFile,
-                    new List<string>
+                    new()
                     {
                         "/SILENT"
                     },

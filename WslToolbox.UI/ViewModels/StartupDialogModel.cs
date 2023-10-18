@@ -11,9 +11,11 @@ public partial class StartupDialogViewModel
     public readonly UserOptions UserOptions;
 
     public StartupDialogViewModel(IConfigurationService configurationService,
-        IOptions<UserOptions> userOptions)
+        IOptions<UserOptions> userOptions, string message, string secondaryButtonText)
     {
         _configurationService = configurationService;
+        Message = message;
+        SecondaryButtonText = secondaryButtonText;
         UserOptions = userOptions.Value;
     }
 
